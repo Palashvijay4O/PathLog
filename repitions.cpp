@@ -49,6 +49,13 @@ const int mod = 1000000007;
 #define trace1(x)       cerr << #x << " : " << x << endl;
 #define trace2(x, y)    cerr << #x << " : " << x << " | " << #y << " : " << y << endl;
 #define trace3(x, y, z) cerr << #x << " : " << x << " | " << #y << " : " << y << " | " << #z << " : " << z << endl;
+enum direction {
+	left,
+	right,
+	back,
+	front
+};
+
 
 pair<double, double> preprocess(string input) {
 	int l = input.length();
@@ -127,6 +134,10 @@ int returnLaneNumber(pair<double, double> point) {
 
 }
 
+
+direction getDirection(int prev, int next) {
+	return direction::left;
+}
 
 int main()
 {
@@ -245,9 +256,13 @@ int main()
 		}
 		cout << inner_revisits << endl;
 
-		// Complete lane paths
+		// Complete list of lane followed 
 		for(auto x: lane_map) {
 			cout << x << " -> ";
+		}
+
+		for(int i = 0; i < lane_map.size()-1; i++) {
+			direction dir = getDirection(lane_map[i], lane_map[i+1]);
 		}
 
 		cout << endl;
