@@ -246,10 +246,8 @@ direction getDirection(int prev, int next) {
 		return direction::north;
 	if(prev == 6 && next == 5)
 		return direction::east;
+	return direction::north;
 
-
-
-	return direction::left;
 }
 
 int main()
