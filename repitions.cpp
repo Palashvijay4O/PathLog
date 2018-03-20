@@ -50,10 +50,10 @@ const int mod = 1000000007;
 #define trace2(x, y)    cerr << #x << " : " << x << " | " << #y << " : " << y << endl;
 #define trace3(x, y, z) cerr << #x << " : " << x << " | " << #y << " : " << y << " | " << #z << " : " << z << endl;
 enum direction {
-	left,
-	right,
-	back,
-	front
+	north,
+	south,
+	east,
+	west
 };
 
 
@@ -136,6 +136,119 @@ int returnLaneNumber(pair<double, double> point) {
 
 
 direction getDirection(int prev, int next) {
+
+// THREE POINT JUNCTIONS
+
+	// Junction J-9
+	if(prev == 13 && next == 9)
+		return direction::west;
+	if(prev == 13 && next == 10)
+		return direction::east;
+	if((prev == 9 && next == 13) || (prev == 10 && next == 13))
+		return direction::south;
+	if(prev == 9 && next == 10)
+		return direction::east;
+	if(prev == 10 && next == 9)
+		return direction::west;
+
+	// Junction J-10
+	if(prev == 13 && next == 11)
+		return direction::west;
+	if(prev == 13 && next == 12)
+		return direction::east;
+	if((prev == 11 && next == 13) || (prev == 12 && next == 13))
+		return direction::north;
+	if(prev == 12 && next == 11)
+		return direction::west;
+	if(prev == 11 && next == 12)
+		return direction::east;
+
+
+	// Junction J-8
+	if(prev == 9 && next == 8)
+		return direction::north;
+	if(prev == 9 && next == 7)
+		return direction::south;
+	if(prev == 7 && next == 8)
+		return direction::north;
+	if(prev == 8 && next == 7)
+		return direction::south;
+	if(prev == 8 && next == 9)
+		return direction::east;
+	if(prev == 7 && next == 9)
+		return direction::east;
+
+
+	// Junction J-7
+	if(prev == 6 && next == 7)
+		return direction::north;
+	if(prev == 6 && next == 11)
+		return direction::east;
+	if(prev == 7 && next == 11)
+		return direction::east;
+	if(prev == 7 && next == 6)
+		return direction::south;
+	if(prev == 11 && next == 6)
+		return direction::south;
+	if(prev == 11 && next == 7)
+		return direction::north;
+
+	// Junction J-3
+	if(prev == 2 && next == 3)
+		return direction::south;
+	if(prev == 3 && next == 2)
+		return direction::north;
+	if(prev == 2 && next == 10)
+		return direction::west;
+	if(prev == 3 && next == 10)
+		return direction::west;
+	if(prev == 10 && next == 3)
+		return direction::south;
+	if(prev == 10 && next == 2)
+		return direction::north;
+
+	// Junction J-4
+	if(prev == 3 && next == 12)
+		return direction::west;
+	if(prev == 4 && next == 12)
+		return direction::west;
+	if(prev == 3 && next == 4)
+		return direction::south;
+	if(prev == 4 && next == 3)
+		return direction::north;
+	if(prev == 12 && next == 4)
+		return direction::south;
+	if(prev == 12 && next == 3)
+		return direction::north;
+
+// TWO POINT JUNCTIONS
+
+	// Junction J-1
+	if(prev == 8 && next == 1)
+		return direction::east;
+	if(prev == 1 && next == 8)
+		return direction::south;
+
+	// Junction J-2
+	if(prev == 1 && next == 2)
+		return direction::south;
+	if(prev == 2 && next == 1)
+		return direction:: west;
+
+	// Junction J-5
+	if(prev == 4 && next == 5)
+		return direction::east;
+	if(prev == 5 && next == 4)
+		return direction::north;
+
+	// Junction J-6
+	if(prev == 5 && next == 6)
+		return direction::north;
+	if(prev == 6 && next == 5)
+		return direction::east;
+
+
+
 	return direction::left;
 }
 
@@ -264,6 +377,7 @@ int main()
 		for(int i = 0; i < lane_map.size()-1; i++) {
 			direction dir = getDirection(lane_map[i], lane_map[i+1]);
 		}
+
 
 		cout << endl;
 		fp.close();
