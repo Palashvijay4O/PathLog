@@ -246,7 +246,11 @@ pair<direction, int> getDirection(int prev, int next) {
 		return {direction::north, 6};
 	if(prev == 6 && next == 5)
 		return {direction::east, 6};
-	return {direction::north, 13};
+	else {
+		//cout << "lode lage" << endl;
+		cout << prev << " " << next << endl;
+		return {direction::north, 13};
+	}
 
 }
 
@@ -324,7 +328,7 @@ int main()
 			int count = 0;
 			lane_map.push_back(c);
 
-			while(onlane[i] == c) {
+			while(onlane[i + 1] == c) {
 				i++;
 				count++;
 			}
@@ -368,14 +372,34 @@ int main()
 		cout << inner_revisits << endl;
 
 		// Complete list of lane followed 
-		for(auto x: lane_map) {
+		/*for(auto x: lane_map) {
 			cout << x << " -> ";
-		}
+		}*/
 
+		vector< vector<int> > junction_directions(10, vector<int>(4, 0));
 		for(int i = 0; i < lane_map.size()-1; i++) {
 			auto dir = getDirection(lane_map[i], lane_map[i+1]);
+			if(dir.first == direction::north) {
+				junction_directions[dir.second-1][0]++;
+			}
+			else if(dir.first == direction::south) {
+				junction_directions[dir.second-1][1]++;
+			}
+			else if(dir.first == direction::east) {
+				junction_directions[dir.second-1][2]++;
+			}
+			else {
+				junction_directions[dir.second-1][3]++;
+			}
 		}
 
+		//cout << "itna hua" << endl;
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 4; j++) {
+				cout << junction_directions[i][j] << "\t";
+			}
+			cout << endl;
+		}
 
 		cout << endl;
 		fp.close();
