@@ -135,118 +135,118 @@ int returnLaneNumber(pair<double, double> point) {
 }
 
 
-direction getDirection(int prev, int next) {
+pair<direction, int> getDirection(int prev, int next) {
 
 // THREE POINT JUNCTIONS
 
 	// Junction J-9
 	if(prev == 13 && next == 9)
-		return direction::west;
+		return {direction::west, 9};
 	if(prev == 13 && next == 10)
-		return direction::east;
+		return {direction::east, 9};
 	if((prev == 9 && next == 13) || (prev == 10 && next == 13))
-		return direction::south;
+		return {direction::south, 9};
 	if(prev == 9 && next == 10)
-		return direction::east;
+		return {direction::east, 9};
 	if(prev == 10 && next == 9)
-		return direction::west;
+		return {direction::west, 9};
 
 	// Junction J-10
 	if(prev == 13 && next == 11)
-		return direction::west;
+		return {direction::west, 10};
 	if(prev == 13 && next == 12)
-		return direction::east;
+		return {direction::east, 10};
 	if((prev == 11 && next == 13) || (prev == 12 && next == 13))
-		return direction::north;
+		return {direction::north, 10};
 	if(prev == 12 && next == 11)
-		return direction::west;
+		return {direction::west, 10};
 	if(prev == 11 && next == 12)
-		return direction::east;
+		return {direction::east, 10};
 
 
 	// Junction J-8
 	if(prev == 9 && next == 8)
-		return direction::north;
+		return {direction::north, 8};
 	if(prev == 9 && next == 7)
-		return direction::south;
+		return {direction::south, 8};
 	if(prev == 7 && next == 8)
-		return direction::north;
+		return {direction::north, 8};
 	if(prev == 8 && next == 7)
-		return direction::south;
+		return {direction::south, 8};
 	if(prev == 8 && next == 9)
-		return direction::east;
+		return {direction::east, 8};
 	if(prev == 7 && next == 9)
-		return direction::east;
+		return {direction::east, 8};
 
 
 	// Junction J-7
 	if(prev == 6 && next == 7)
-		return direction::north;
+		return {direction::north, 7};
 	if(prev == 6 && next == 11)
-		return direction::east;
+		return {direction::east, 7};
 	if(prev == 7 && next == 11)
-		return direction::east;
+		return {direction::east, 7};
 	if(prev == 7 && next == 6)
-		return direction::south;
+		return {direction::south, 7};
 	if(prev == 11 && next == 6)
-		return direction::south;
+		return {direction::south, 7};
 	if(prev == 11 && next == 7)
-		return direction::north;
+		return {direction::north, 7};
 
 	// Junction J-3
 	if(prev == 2 && next == 3)
-		return direction::south;
+		return {direction::south, 3};
 	if(prev == 3 && next == 2)
-		return direction::north;
+		return {direction::north, 3};
 	if(prev == 2 && next == 10)
-		return direction::west;
+		return {direction::west, 3};
 	if(prev == 3 && next == 10)
-		return direction::west;
+		return {direction::west, 3};
 	if(prev == 10 && next == 3)
-		return direction::south;
+		return {direction::south, 3};
 	if(prev == 10 && next == 2)
-		return direction::north;
+		return {direction::north, 3};
 
 	// Junction J-4
 	if(prev == 3 && next == 12)
-		return direction::west;
+		return {direction::west, 4};
 	if(prev == 4 && next == 12)
-		return direction::west;
+		return {direction::west, 4};
 	if(prev == 3 && next == 4)
-		return direction::south;
+		return {direction::south, 4};
 	if(prev == 4 && next == 3)
-		return direction::north;
+		return {direction::north, 4};
 	if(prev == 12 && next == 4)
-		return direction::south;
+		return {direction::south, 4};
 	if(prev == 12 && next == 3)
-		return direction::north;
+		return {direction::north, 4};
 
 // TWO POINT JUNCTIONS
 
 	// Junction J-1
 	if(prev == 8 && next == 1)
-		return direction::east;
+		return {direction::east, 1};
 	if(prev == 1 && next == 8)
-		return direction::south;
+		return {direction::south, 1};
 
 	// Junction J-2
 	if(prev == 1 && next == 2)
-		return direction::south;
+		return {direction::south, 2};
 	if(prev == 2 && next == 1)
-		return direction:: west;
+		return {direction:: west, 2};
 
 	// Junction J-5
 	if(prev == 4 && next == 5)
-		return direction::east;
+		return {direction::east, 5};
 	if(prev == 5 && next == 4)
-		return direction::north;
+		return {direction::north, 5};
 
 	// Junction J-6
 	if(prev == 5 && next == 6)
-		return direction::north;
+		return {direction::north, 6};
 	if(prev == 6 && next == 5)
-		return direction::east;
-	return direction::north;
+		return {direction::east, 6};
+	return {direction::north, 13};
 
 }
 
@@ -373,7 +373,7 @@ int main()
 		}
 
 		for(int i = 0; i < lane_map.size()-1; i++) {
-			direction dir = getDirection(lane_map[i], lane_map[i+1]);
+			auto dir = getDirection(lane_map[i], lane_map[i+1]);
 		}
 
 
